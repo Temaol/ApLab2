@@ -1,0 +1,59 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define KST 15
+#define BUF 200
+
+void PrintDoubleChar(char* str);
+
+int main()
+{
+//  system("chcp 1251"); // for windows
+//  system("cls"); // for windows
+  int kst;
+  char str[KST][BUF];
+
+  puts("Введіть кількість речень які хочете ввести:");
+  scanf("%d", &kst);
+  rewind(stdin);
+
+  puts("Вводіть ваші речення");
+  for (int i = 0; i < kst; i++)
+    gets(str[i]);
+
+  puts("Ваші слова з подвоєними буквами:");
+  for (int i = 0; i < kst; i++) {
+    PrintDoubleChar(str[i]);
+    puts("");
+  }
+
+  //system("pause");  // for windows
+  return 0;
+}
+
+void PrintDoubleChar(char* str)
+{
+  char* p = str;
+  int chose = 0;
+  while (*str!='\0')
+  {
+    if (*str == *(str + 1) && *str != ' ') {
+      while (*str!=' ' && p!=str)
+      {
+        str--;
+      }
+      str++;
+      while (*str != ' ' && *str != '\0') {
+        putchar(*str);
+        str++;
+        if (*str == '\0')
+          chose = 1;
+      }
+      if (chose == 1)
+        break;
+      putchar('\t');
+    }
+    str++;
+  }
+}
